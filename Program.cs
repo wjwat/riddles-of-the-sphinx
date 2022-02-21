@@ -16,6 +16,7 @@
 // Ask next question, or show that you're a winner (Harry)
 
 using System;
+using System.Collections.Generic;
 using Games.Riddles;
 
 namespace AnotherDumbProgram {
@@ -23,15 +24,26 @@ namespace AnotherDumbProgram {
   {
     public static void Main()
     {
-      Sphinx s = new Sphinx();
-      const string title = "##########################################\n" +
-                           "#                                        #\n" +
-                           "#           THE SPHINX AWAITS!           #\n" +
-                           "#                                        #\n" +
-                           "##########################################\n";
+      Dictionary<string, string> outPutStrings = new Dictionary<string, string>()
+      {
+        {"title", "##########################################\n" +
+                  "#                                        #\n" +
+                  "#           THE SPHINX AWAITS!           #\n" +
+                  "#                                        #\n" +
+                  "##########################################\n"},
+        {"winner", "\n" + 
+                   "\t***************\n" +
+                   "\t* You've Won! *\n" +
+                   "\t***************\n"},
+        {"loser", "\n\tSPHINX: You've Lost!\n"},
+        {"correct", "\n\tSPHINX: You've answered the question correctly\n"},
+        {"incorrect", "\n\tSPHINX: I've met some idiots in my day, but you take the cake!\n"}
+      };
 
+
+      Sphinx s = new Sphinx();
       // Loop to play as many times as we want
-      Console.WriteLine(title);
+      Console.WriteLine(outPutStrings["title"]);
 
       // Loop forever unless a condition returns inside loop
       while (true) {
@@ -46,15 +58,15 @@ namespace AnotherDumbProgram {
         bool answerCheck = s.checkAnswer(input);
 
         if (answerCheck == true && s.checkWinner() == true) {
-          Console.WriteLine("You've won!");
+          Console.WriteLine(outPutStrings["winner"]);
           return;
         } else if (s.isOutOfTries()) {
-          Console.WriteLine("You're out of tries, good luck next time!");
+          Console.WriteLine(outPutStrings["loser"]);
           return;
         } else if (answerCheck == true) {
-          Console.WriteLine("You've answered the question correctly!");
+          Console.WriteLine(outPutStrings["correct"]);
         } else {
-          Console.WriteLine("You're a dingus!");
+          Console.WriteLine(outPutStrings["incorrect"]);
         }
       }
     }
