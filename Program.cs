@@ -35,9 +35,9 @@ namespace AnotherDumbProgram {
                    "\t***************\n" +
                    "\t* You've Won! *\n" +
                    "\t***************\n"},
-        {"loser", "\n\tSPHINX: You've Lost!\n"},
-        {"correct", "\n\tSPHINX: You've answered the question correctly\n"},
-        {"incorrect", "\n\tSPHINX: I've met some idiots in my day, but you take the cake!\n"}
+        {"loser", "\n  SPHINX: You've Lost!\n"},
+        {"correct", "\n  SPHINX: You've answered the question correctly\n"},
+        {"incorrect", "\n  SPHINX: I've met some idiots in my day, but you take the cake!\n"}
       };
 
 

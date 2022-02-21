@@ -12,7 +12,11 @@ namespace Games.Riddles
       {"How many fingers do I have held up?", "4"},
       {"What have I got in my pocket?", "The One True Ring"},
       {"Fizz?", "Buzz"},
-      {"Ding?", "Dong"}
+      {"Ding?", "Dong"},
+      {"What is Epicodus?", "A school"},
+      {"What is 10 * 2.5?", "25"},
+      {"What is your favorite website?", "bananakingz.net"},
+      {"What is the airspeed velocity of a swallow?", "African or European?"}
     };
 
     private int Score;
