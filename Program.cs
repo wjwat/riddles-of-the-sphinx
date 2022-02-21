@@ -24,8 +24,39 @@ namespace AnotherDumbProgram {
     public static void Main()
     {
       Sphinx s = new Sphinx();
+      const string title = "##########################################\n" +
+                           "#                                        #\n" +
+                           "#           THE SPHINX AWAITS!           #\n" +
+                           "#                                        #\n" +
+                           "##########################################\n";
 
-      Console.WriteLine(s.getRiddle());
+      // Loop to play as many times as we want
+      Console.WriteLine(title);
+
+      // Loop forever unless a condition returns inside loop
+      while (true) {
+        // Add count to riddle to see which one we're on
+        Console.WriteLine("RIDDLE: " + s.getRiddle());
+
+        // Display score to see how many we've answered correctly & how many
+        // tries you have left
+        Console.Write("ANSWER: ");
+        string input = Console.ReadLine();
+
+        bool answerCheck = s.checkAnswer(input);
+
+        if (answerCheck == true && s.checkWinner() == true) {
+          Console.WriteLine("You've won!");
+          return;
+        } else if (s.isOutOfTries()) {
+          Console.WriteLine("You're out of tries, good luck next time!");
+          return;
+        } else if (answerCheck == true) {
+          Console.WriteLine("You've answered the question correctly!");
+        } else {
+          Console.WriteLine("You're a dingus!");
+        }
+      }
     }
   }
 }

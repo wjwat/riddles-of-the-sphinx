@@ -12,11 +12,12 @@ namespace Games.Riddles
 
     private static Dictionary<string, string> _Riddles = new Dictionary<string, string>()
     {
-      {"ping", "2"},
-      {"pong", "4"},
-      {"fizz", "6"}
+      {"What is your age?", "25"},
+      {"How many fingers do I have held up?", "4"},
+      {"What have I got in my pocket?", "The One True Ring"}
     };
 
+    // MaxScore, MaxTries -- Set constructor to choose difficulty
     public Sphinx()
     {
       Score = 0;
@@ -34,6 +35,25 @@ namespace Games.Riddles
     public bool checkAnswer(string answer)
     {
       if (answer.ToUpper() == Answer.ToUpper()) {
+        Tries += 1;
+        Score += 1;
+        return true;
+      } else {
+        // Tries += 1;
+        return false;
+      }
+    }
+
+    public bool checkWinner() {
+      if (Score == 3) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public bool isOutOfTries() {
+      if (Tries >= 5) {
         return true;
       } else {
         return false;
