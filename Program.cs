@@ -26,33 +26,39 @@ namespace AnotherDumbProgram {
     {
       Dictionary<string, string> outPutStrings = new Dictionary<string, string>()
       {
-        {"title", "##########################################\n" +
-                  "#                                        #\n" +
-                  "#           THE SPHINX AWAITS!           #\n" +
-                  "#                                        #\n" +
-                  "##########################################\n"},
+        {"title", "\n" +
+                  "     ##########################################\n" +
+                  "     #                                        #\n" +
+                  "     #           THE SPHINX AWAITS!           #\n" +
+                  "     #                                        #\n" +
+                  "     ##########################################\n" +
+                  "\n" +
+                  "             ANSWER THE QUESTIONS AND\n" +
+                  "                 TEST YOUR METTLE\n"},
         {"winner", "\n" + 
-                   "\t***************\n" +
-                   "\t* You've Won! *\n" +
-                   "\t***************\n"},
-        {"loser", "\n  SPHINX: You've Lost!\n"},
-        {"correct", "\n  SPHINX: You've answered the question correctly\n"},
-        {"incorrect", "\n  SPHINX: I've met some idiots in my day, but you take the cake!\n"}
+                   "                ***************\n" +
+                   "                * YOU'VE WON! *\n" +
+                   "                ***************\n"},
+        {"loser", "\n  SPHINX: You've Lost!"},
+        {"correct", "\n  SPHINX: You got lucky this time, mortal!"},
+        {"incorrect", "\n  SPHINX: I've met some idiots in my day, but you take the cake!"}
       };
 
-
       Sphinx s = new Sphinx();
-      // Loop to play as many times as we want
+      int riddleCount = 1;
+
       Console.WriteLine(outPutStrings["title"]);
 
-      // Loop forever unless a condition returns inside loop
+      // Loop to play as many times as we want
       while (true) {
-        // Add count to riddle to see which one we're on
-        Console.WriteLine("RIDDLE: " + s.getRiddle());
+        // Is there a way to do this, and keep this string with the others in
+        // our dictionary up above?
+        string status = $"  SPHINX: You've got {s.GetTriesLeft()} tries left," +
+          $" and {s.GetScore()} correct answers\n";
 
-        // Display score to see how many we've answered correctly & how many
-        // tries you have left
-        Console.Write("ANSWER: ");
+        Console.WriteLine(status);
+        Console.WriteLine($"RIDDLE[{riddleCount}]: {s.getRiddle()}");
+        Console.Write($"ANSWER[{riddleCount}]: ");
         string input = Console.ReadLine();
 
         bool answerCheck = s.checkAnswer(input);
@@ -68,6 +74,7 @@ namespace AnotherDumbProgram {
         } else {
           Console.WriteLine(outPutStrings["incorrect"]);
         }
+        riddleCount += 1;
       }
     }
   }

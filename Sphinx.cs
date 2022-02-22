@@ -6,8 +6,7 @@ namespace Games.Riddles
 {
   public class Sphinx
   {
-    private static Dictionary<string, string> _Riddles = new Dictionary<string, string>()
-    {
+    private static Dictionary<string, string> _Riddles = new Dictionary<string, string>() {
       {"What is your age?", "25"},
       {"How many fingers do I have held up?", "4"},
       {"What have I got in my pocket?", "The One True Ring"},
@@ -22,17 +21,25 @@ namespace Games.Riddles
     private int Score;
     private int Tries;
     private int IndexIntoQuestionOrder;
+    private int MaxScore;
+    private int MaxTries;
     private List<int> QuestionOrder;
 
     // MaxScore, MaxTries -- Set constructor to choose difficulty
-    public Sphinx()
-    {
+    public Sphinx(int maxScore = 3, int maxTries = 5) {
       Score = 0;
       Tries = 0;
       IndexIntoQuestionOrder = 0;
+      MaxScore = maxScore;
+      MaxTries = maxTries;
 
       randomizeQuestionOrder();
     }
+
+    public int GetTriesLeft() {
+      return MaxTries - Tries;
+    }
+    public int GetScore() { return Score; }
 
     public string getRiddle()
     {
@@ -46,12 +53,6 @@ namespace Games.Riddles
       int i = QuestionOrder[IndexIntoQuestionOrder];
       IndexIntoQuestionOrder = (IndexIntoQuestionOrder == _Riddles.Count-1) ? 0 : IndexIntoQuestionOrder + 1;
 
-      // if (IndexIntoQuestionOrder == _Riddles.Count-1) {
-      //   IndexIntoQuestionOrder = 0;
-      // } else {
-      //   IndexIntoQuestionOrder += 1;
-      // }
-
       if (answer.ToUpper() == _Riddles.Values.ElementAt(i).ToUpper()) {
         Score += 1;
         return true;
@@ -62,19 +63,11 @@ namespace Games.Riddles
     }
 
     public bool checkWinner() {
-      if (Score == 3) {
-        return true;
-      } else {
-        return false;
-      }
+      return (Score >= MaxScore);
     }
 
     public bool isOutOfTries() {
-      if (Tries >= 5) {
-        return true;
-      } else {
-        return false;
-      }
+      return (Tries >= MaxTries);
     }
 
     private void randomizeQuestionOrder() {
@@ -84,5 +77,3 @@ namespace Games.Riddles
     }
   }
 }
-
-// Dictionary<string, string> myDictionary = new Dictionary<string, string>() { {"A", "apple"}, {"B", "bear"} };
